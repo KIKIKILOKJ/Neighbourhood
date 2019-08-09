@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Neighborhood,Profile,Business
-from .forms import NewNeighborhoodForm,EditProfileForm
+from .forms import NewNeighborhoodForm,EditProfileForm,NewBusinessForm
 
 # Create your views here.
 def index(request):
@@ -67,3 +67,17 @@ def edit_profile(request):
         form = EditProfileForm()
             
     return render(request,'edit_profile.html',{'form':form})
+
+@login_required(login_url='/accounts/login')
+def new_business(request):
+    current_user=request.user
+    if request.method == 'POST':
+        form = NewBusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.save()
+        return redirect ('index')
+    else:
+        form = NewBusinessForm()
+        return render(request,'new_business.html',{"form":form})
