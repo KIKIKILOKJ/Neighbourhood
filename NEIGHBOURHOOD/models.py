@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 class Neighborhood(models.Model):
-    name=models.Charfield(max_length=30)
+    name=models.CharField(max_length=30)
     location=models.CharField(max_length=30)
     neighborhood_image=models.ImageField(upload_to='neighborhood/')
     occupants=models.IntegerField()
@@ -35,7 +35,7 @@ class Neighborhood(models.Model):
         
     
     
-class Business(models.Models):
+class Business(models.Model):
     biz_name=models.CharField(max_length=150)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
