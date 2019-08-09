@@ -69,3 +69,8 @@ class Profile(models.Model):
     def search_business(cls,search_biz_name):
         results = cls.objects.filter(name__icontains=search_biz_name)
         return results
+    
+    @classmethod
+    def view_neigborhood(cls,neighborhood_id):
+        neighborhood=cls.objects.filter(id=neighborhood_id)
+        return neighborhood
