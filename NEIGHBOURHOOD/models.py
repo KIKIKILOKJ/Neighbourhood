@@ -55,3 +55,12 @@ class Profile(models.Model):
     neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
     profile_picture=models.ImageField(upload_to='profiles/')
     email=models.CharField(max_length=300)
+    
+    def __str__(self):
+        return self.name
+    
+    def save_profile(self):
+        self.save()
+        
+    def delete_profile(self):
+        self.delete()
