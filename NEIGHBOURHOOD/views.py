@@ -32,3 +32,17 @@ def search_business(request):
     else:
         message="There are no bussinesses by that term in the neighborhood"
         return render(request,'search.html',{"message":message})
+    
+@login_required(login_url='/accounts/login')
+def new_neighborhood(request):
+    current_user = request.user 
+    if request.method == 'POST':
+        form = NewNeighborhoodForm(request.POST,request.FILES)
+        if form.is_valid():
+            neighborhood = form.save(commit=False)
+            neighborhood.user = current_user
+            neighborhood.save()
+            return redirect('index')
+    else:
+        form=NewNeighboroodForm()
+        return render(request,'new_neighborhood.html',{"form":form})
