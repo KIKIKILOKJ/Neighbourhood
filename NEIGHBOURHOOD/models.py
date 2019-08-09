@@ -26,3 +26,10 @@ class Neighborhood(models.Model):
         
     def update_occupants(self):
         self.update()
+    
+class Business(models.Models):
+    biz_name=models.CharField(max_length=150)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+    description=models.CharField(max_length=200)
+    biz_email=models.CharField(max_length=300)
