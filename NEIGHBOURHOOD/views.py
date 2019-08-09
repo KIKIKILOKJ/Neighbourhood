@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Neighborhood,Profile,Business
+from .forms import NewNeighborhoodForm
 
 # Create your views here.
 def index(request):
@@ -44,5 +45,5 @@ def new_neighborhood(request):
             neighborhood.save()
             return redirect('index')
     else:
-        form=NewNeighboroodForm()
+        form=NewNeighborhoodForm()
         return render(request,'new_neighborhood.html',{"form":form})
