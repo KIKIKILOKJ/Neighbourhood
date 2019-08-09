@@ -19,3 +19,16 @@ def user_profile(request):
     current_user = request.user
     profile=Profile.objects.filter(user=current_user)
     return render(request,'profile.html',{"profile":profile})
+
+@login_required(login_url='/accounts/login')
+def search_business(request):
+    if 'biz_name' in request.GET and request.GET['biz_name']:
+        search_biz_name = request.GET.get['biz_name']
+        business_found=Business.search_business(search_biz_name)
+        
+        message=f'{search_biz_name}'
+        return render(request,'search.html',{"message":message,"bussiness":business_found})
+    
+    else:
+        message="There are no bussinesses by that term in the neighborhood"
+        return render(request,'search.html',{"message":message})
