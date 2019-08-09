@@ -33,3 +33,18 @@ class Business(models.Models):
     neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
     description=models.CharField(max_length=200)
     biz_email=models.CharField(max_length=300)
+    
+    def __str__(self):
+        return self.biz_name
+    
+    def create_business(self):
+        self.create()
+        
+    def delete_business(self):
+        self.delete()
+    
+    def find_business(self):
+        self.find()
+        
+    def update_business(self):
+        self.update()
