@@ -38,8 +38,8 @@ class Business(models.Models):
     biz_name=models.CharField(max_length=150)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
-    description=models.CharField(max_length=200)
-    biz_email=models.CharField(max_length=300)
+    description=HTMLField
+    biz_email=models.EmailField(max_length=300)
     
     @classmethod
     def search_business(cls,search_biz_name):
@@ -66,7 +66,7 @@ class Profile(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
     profile_picture=models.ImageField(upload_to='profiles/')
-    email=models.CharField(max_length=300)
+    email=models.EmailField(max_length=300)
     
     def __str__(self):
         return self.name
