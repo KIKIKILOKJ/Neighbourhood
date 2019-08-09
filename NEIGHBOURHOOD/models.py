@@ -48,3 +48,10 @@ class Business(models.Models):
         
     def update_business(self):
         self.update()
+        
+class Profile(models.Model):
+    name=models.CharField(max_length=150)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+    profile_picture=models.ImageField(upload_to='profiles/')
+    email=models.CharField(max_length=300)
