@@ -7,3 +7,9 @@ def index(request):
     neighborhood=Neighborhood.objects.all()
     title='The Neighborhood'
     return render(request,'index.html',{"title":title,"neighborhood":neighborhood})
+
+@login_required(login_url='/accounts/login')
+def neighborhood(request,neighborhood_id):
+    neighborhood=Neighborhood.objects.filter(id=neighborhood_id)
+    results=Business.objects.filter(neighborhood=neighborhood_id)
+    return render(request,'neighborhood.html',{"neighborhood":neighborhood,"results":results})
