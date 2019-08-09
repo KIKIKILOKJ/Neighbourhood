@@ -64,3 +64,8 @@ class Profile(models.Model):
         
     def delete_profile(self):
         self.delete()
+        
+    @classmethod
+    def search_business(cls,search_biz_name):
+        results = cls.objects.filter(name__icontains=search_biz_name)
+        return results
