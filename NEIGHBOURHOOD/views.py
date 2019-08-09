@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Neighborhood,Profile,Business
-from .forms import NewNeighborhoodForm
+from .forms import NewNeighborhoodForm,EditProfileForm
 
 # Create your views here.
 def index(request):
@@ -47,3 +47,23 @@ def new_neighborhood(request):
     else:
         form=NewNeighborhoodForm()
         return render(request,'new_neighborhood.html',{"form":form})
+
+@login_required(login_url='/accounts/login')
+def edit_profile(request):
+    current_user =  request.user 
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile_picture=form.cleaned_data['profile_picture']
+            name=form.cleaned_data['name']
+            email= form.cleaned_data['email']
+            Profile.objects.filter(user=current_user).update(profile_picture=profile_picture,name=name,email=email)
+
+            profile.save()
+            return redirect('user_profile')
+    else:
+        form = EditProfileForm()
+            
+    return render(request,'edit_profile.html',{'form':form})
