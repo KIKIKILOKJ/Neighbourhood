@@ -9,6 +9,11 @@ class Neighborhood(models.Model):
     occupants=models.IntegerField()
     admin=models.ForeignKey(User,on_delete=models.CASCADE)
     
+    @classmethod
+    def view_neighborhood(cls,neighborhood_id):
+        neighborhood=cls.objects.filter(id=neighborhood_id)
+        return neighborhood
+    
     def __str__(self):
         return self.name
     
@@ -26,6 +31,8 @@ class Neighborhood(models.Model):
         
     def update_occupants(self):
         self.update()
+        
+    
     
 class Business(models.Models):
     biz_name=models.CharField(max_length=150)
@@ -33,6 +40,11 @@ class Business(models.Models):
     neighborhood=models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
     description=models.CharField(max_length=200)
     biz_email=models.CharField(max_length=300)
+    
+    @classmethod
+    def search_business(cls,search_biz_name):
+        results = cls.objects.filter(name__icontains=search_biz_name)
+        return results
     
     def __str__(self):
         return self.biz_name
@@ -64,13 +76,3 @@ class Profile(models.Model):
         
     def delete_profile(self):
         self.delete()
-        
-    @classmethod
-    def search_business(cls,search_biz_name):
-        results = cls.objects.filter(name__icontains=search_biz_name)
-        return results
-    
-    @classmethod
-    def view_neigborhood(cls,neighborhood_id):
-        neighborhood=cls.objects.filter(id=neighborhood_id)
-        return neighborhood
