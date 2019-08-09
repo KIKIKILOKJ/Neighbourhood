@@ -1,3 +1,4 @@
 Django==1.11
 gunicorn==19.9.0
+Pillow==6.1.0
 pytz==2019.2
