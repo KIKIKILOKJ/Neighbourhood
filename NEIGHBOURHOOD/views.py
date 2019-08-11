@@ -34,7 +34,7 @@ def search_business(request):
         return render(request,'search.html',{"message":message,"bussiness":business_found})
     
     else:
-        message="There are no bussinesses by that term in the neighborhood"
+        message="There is no bussines by that term in the neighborhood"
         return render(request,'search.html',{"message":message})
     
 @login_required(login_url='/accounts/login')
