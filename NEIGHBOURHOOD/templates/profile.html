@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="text-center">
+                    <h2>Welcome to the {{neighborhood.name}}Neighborhood!</h2>
+                    <a href="{% url 'EDIT PROFILE'%}"><button class="btn btn-outline-dark">Edit Profile</button></a>
+                </div>
+                {% for profile in profiles %}
+                    <img src="{{profile.profile_picture}}" alt="Profile picture" class="img-fluid">
+                    <h2>{{profile.name}}</h2>
+                    <p>Neighborhood: {{profile.neighborhood.name}}</p>
+                    <p>Contact: <em>{{profile.email}}</em></p>
+            <div>
+            <a href="{% url 'NEW BUSINESS'%}"><button class="btn btn-dark">Add Business</button></a>
+        </div>
+        {% endfor %}
+            {% if profile%}
+                {% else %}
+                <h1>Be part of the Community </h1>
+
+            {% endif %}
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
