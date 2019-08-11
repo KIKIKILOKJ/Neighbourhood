@@ -51,5 +51,18 @@
         </div>
     </div>
 </div>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="Text-center">
+            {% for neighborhood in neighborhood %}
+            <div class="col-md-4">
+                <img src="{{neighborhood.neighborhood_image}}"alt="{{neighborhood.name}}" class="img-fluid">
+                <a href="/accounts/register/"><div class="btn btn-dark"><p class="white-text">Join Neighborhood</p></div></a>
+            </div>
+            <p> {{neighborhood.name}} </p>
+            <a href="{% url 'NEIGHBORHOOD DETAILS' neighborhood_id=neighborhood.id%}"><button class="btn btn-dark">View Businesses</button></a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
