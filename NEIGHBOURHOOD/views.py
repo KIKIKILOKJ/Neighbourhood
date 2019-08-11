@@ -16,10 +16,13 @@ def neighborhood(request,neighborhood_id):
     return render(request,'neighborhood.html',{"neighborhood":neighborhood,"results":results})
 
 @login_required(login_url='/accounts/login')
-def user_profile(request):
-    current_user = request.user
-    profile=Profile.objects.filter(user=current_user)
-    return render(request,'profile.html',{"profile":profile})
+def profile(request):
+    user = User.objects.all()
+    for user in user:
+        profile=Profile.objects.all()
+        neighborhood=Neighborhood.objects.all()
+        print (user)
+    return render(request,'profile.html',{ "user": user,"profile": profile,"neighborhood":neighborhood})
 
 @login_required(login_url='/accounts/login')
 def search_business(request):
