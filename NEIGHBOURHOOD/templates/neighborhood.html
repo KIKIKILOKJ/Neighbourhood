@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container-fluid">
+    <div class="row business-section">
+      
+      <div class="col-md-1"></div>
+      <div class="col-md-10 ">
+        {% for neighborhood in neighborhood %}
+        <h2 class="text-center">{{neighborhood.name}}</h2>
+        <hr>
+        <div class="col-md-5">
+            <img src="{{neighborhood.neighborhood_image.url}}" alt="{{neighborhood.name}}" class="img-fluid z-depth-3">
+            <p class="white-text">East or West home is best.</p>
+        </div>
+        {% endfor %}
+        <a href="{% url 'NEW BUSINESS'%}"><button class="btn btn-outline-dark">Add Business</button></a>
+            {% for business in found%}          
+            <span class="text-highlight"><h2>Businesses</h2></span>
+            <table class="table table-striped w-auto">
+              <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Business Name</th>
+                    <th>Email Contact</th>
+                    <th>Description</th>
+                    <th>Neighbor posted</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-info">
+                    <th scope="row">1</th>
+                    <td>{{business.name}}</td>
+                    <td>{{business.business_mail}}</td>
+                    <td>{{business.description}}</td>
+                    <td><cite>{{business.user.username}}</cite></td>                   
+                  </tr>
+                </tbody>
+            </table>            
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      
+    </div>
+  </div>
+{% endblock %}
