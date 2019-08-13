@@ -22,7 +22,7 @@ def profile(request):
         profile=Profile.objects.all()
         neighborhood=Neighborhood.objects.all()
         print (user)
-    return render(request,'profile.html',{ "user": user,"profile": profile,"neighborhood":neighborhood})
+    return render(request,'profile.html',{ "user": user,"profile":profile,"neighborhood":neighborhood})
 
 @login_required(login_url='/accounts/login')
 def search_business(request):

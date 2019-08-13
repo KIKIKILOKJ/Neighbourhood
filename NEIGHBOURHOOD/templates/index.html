@@ -12,32 +12,6 @@
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="la.jpg" alt="Chania">
-                    <div class="carousel-caption">
-                        <h3>Los Angeles</h3>
-                        <p>LA is always so much fun!</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="chicago.jpg" alt="Chicago">
-                    <div class="carousel-caption">
-                        <h3>Chicago</h3>
-                        <p>Thank you, Chicago!</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="ny.jpg" alt="New York">
-                    <div class="carousel-caption">
-                        <h3>New York</h3>
-                        <p>We love the Big Apple!</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -55,12 +29,21 @@
     <div class="row">
         <div class="Text-center">
             {% for neighborhood in neighborhood %}
-            <div class="col-md-4">
-                <img src="{{neighborhood.neighborhood_image}}"alt="{{neighborhood.name}}" class="img-fluid">
-                <a href="/accounts/register/"><div class="btn btn-dark"><p class="white-text">Join Neighborhood</p></div></a>
+            <div class="col-md-6">
+            
+                <div class="card text-center">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <img class="img-fluid" src="{{neighborhood.neighborhood_image.url}}" alt="{{neighborhood.name}}"style="width:700px;height:700px;">
+                        <p> {{neighborhood.name}} </p>
+                        <hr>
+                        <a href="/accounts/register/"><button class="btn btn-outline-dark" type="submit">Join NEIGHBORHOOD</button></a>
+                        <hr>
+                        <a href={% url 'NEIGHBORHOOD DETAILS' neighborhood_id=neighborhood.id%}><button class="btn btn-outline-dark" type="submit">View Businesses</button></a>
+                    </div>
+                </div>
             </div>
-            <p> {{neighborhood.name}} </p>
-            <a href="{% url 'NEIGHBORHOOD DETAILS' neighborhood_id=neighborhood.id%}"><button class="btn btn-dark">View Businesses</button></a>
             {% endfor %}
         </div>
     </div>
